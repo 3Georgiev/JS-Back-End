@@ -1,13 +1,13 @@
 const Cube = require("../models/Cube");
-const cubes = [];
 exports.create = async (cubeData) => {
   const cube = await Cube.create(cubeData);
 
   return cube;
 };
 
-exports.getAll = (search, from, to) => {
-  let filterCubes = [...cubes];
+exports.getAll = async (search, from, to) => {
+  let filterCubes = await Cube.find().lean();
+
   if (search) {
     filterCubes = filterCubes.filter((cube) =>
       cube.name.toLowerCase().includes(search.toLowerCase())
@@ -29,5 +29,5 @@ exports.getAll = (search, from, to) => {
 };
 
 exports.getSingleCube = (id) => {
-  return cubes.find((cube) => cube.id === id);
+  return Cube.findById(id).lean();
 };
