@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const accessoryService = require("../services/accesoryService");
+const accessoryService = require("../services/accessoryService");
 
 router.get("/create", (req, res) => {
   res.render("accessory/create");

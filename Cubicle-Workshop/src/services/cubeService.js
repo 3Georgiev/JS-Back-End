@@ -1,4 +1,5 @@
 const Cube = require("../models/Cube");
+
 exports.create = async (cubeData) => {
   const cube = await Cube.create(cubeData);
 
@@ -28,6 +29,11 @@ exports.getAll = async (search, from, to) => {
   return filterCubes;
 };
 
-exports.getSingleCube = (id) => {
-  return Cube.findById(id).lean();
+exports.getSingleCube = (id) => Cube.findById(id).populate("accessories");
+
+exports.attachAccessory = async (cubeId, accessoryId) => {
+  const cube = await this.getSingleCube(cubeId);
+
+  cube.accessories.push(accessoryId);
+  return cube.save();
 };
