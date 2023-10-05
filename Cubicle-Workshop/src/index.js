@@ -3,8 +3,11 @@ const app = express();
 const handlebarsConfig = require("./config/handlebarsConfig");
 const expressConfig = require("./config/expressConfig");
 const routes = require("./router");
+const dbConnect = require("./config/dbConfig");
 
 const PORT = 3000;
+
+dbConnect().then(() => console.log("Connected to DB!"));
 
 //handlebars Config
 handlebarsConfig(app);
