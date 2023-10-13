@@ -15,7 +15,7 @@ router.get("/:cubeId/details", async (req, res) => {
   const { cubeId } = req.params;
   const cube = await cubeServices.getSingleCube(cubeId).lean();
   const hasAccessories = cube.accessories.length > 0;
-  console.log(hasAccessories);
+
   if (!cube) {
     res.redirect("/404");
     return;
