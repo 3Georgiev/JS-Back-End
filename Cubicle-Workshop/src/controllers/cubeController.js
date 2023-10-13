@@ -22,12 +22,12 @@ router.get("/:cubeId/details", async (req, res) => {
   const { cubeId } = req.params;
   const cube = await cubeServices.getSingleCube(cubeId).lean();
   const hasAccessories = cube.accessories.length > 0;
-
+  const isOwner = cube.owner?.toString() === req.user._id;
   if (!cube) {
     res.redirect("/404");
     return;
   }
-  res.render("details", { cube, hasAccessories });
+  res.render("details", { cube, hasAccessories, isOwner });
 });
 
 router.get("/:cubeId/attach-accessory", async (req, res) => {
