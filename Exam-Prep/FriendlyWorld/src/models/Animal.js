@@ -20,10 +20,7 @@ const animalSchema = new mongoose.Schema({
   imageUrl: {
     type: String,
     required: [true, "Image is required!"],
-    match: [
-      /((https?:\/\/)|(\/)|(..\/))(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/gm,
-      "Please provide valid image URL!",
-    ],
+    match: [/https?:\/\//g, "Please provide valid image URL!"],
   },
   need: {
     type: String,
